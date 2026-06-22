@@ -10,10 +10,10 @@ public class Kit {
     private double precio;
     private int disponibles;
 
+    public Kit() {
+    }
 
-    public Kit(){}
-
-    public Kit(String codigo, String nombre, String descripcion, ArrayList<Partido> partidos, double precio, int disponibles){
+    public Kit(String codigo, String nombre, String descripcion, ArrayList<Partido> partidos, double precio, int disponibles) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -69,6 +69,4 @@ public class Kit {
     public void setDisponibles(int disponibles) {
         this.disponibles = disponibles;
     }
-
-    
 }
