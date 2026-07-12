@@ -1,5 +1,9 @@
+package src;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Proyecto POO iniciado");
+        Sistema sistema = new Sistema();
+        sistema.cargarDatos();
+        sistema.iniciarSesion();
     }
 }
