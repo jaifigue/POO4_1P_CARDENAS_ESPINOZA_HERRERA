@@ -3,7 +3,6 @@ package src;
 import java.util.ArrayList;
 
 public class Kit {
-    //Atributos
     private String codigo;
     private String nombre;
     private String descripcion;
@@ -11,10 +10,10 @@ public class Kit {
     private double precio;
     private int disponibles;
 
-    //Constructores y métodos basicos
-    public Kit(){}
+    public Kit() {
+    }
 
-    public Kit(String codigo, String nombre, String descripcion, ArrayList<Partido> partidos, double precio, int disponibles){
+    public Kit(String codigo, String nombre, String descripcion, ArrayList<Partido> partidos, double precio, int disponibles) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -23,23 +22,6 @@ public class Kit {
         this.disponibles = disponibles;
     }
 
-    //Método to String - AGG GITHUB
-    @Override
-    public String toString(){
-        String resultado = "";
-        resultado = codigo+" - "+nombre+"\nIncluye: "+"\n";
-        for(Partido p : partidos){
-            resultado = resultado +"- "+p.getLocal()+" vs "+p.getVisitante()+"\n";
-        }
-        resultado = resultado + "\nPrecio: "+precio+"\nDisponibles: "+disponibles;
-        System.out.println("----------------");
-        return resultado;
-    }
-
-
-
-
-    //Getters y setters
     public String getCodigo() {
         return codigo;
     }
@@ -87,6 +69,4 @@ public class Kit {
     public void setDisponibles(int disponibles) {
         this.disponibles = disponibles;
     }
-
-    
 }

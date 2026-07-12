@@ -1,5 +1,6 @@
 package src;
 
-public enum RolUsuario{
-    A, O
+public enum RolUsuario {
+    A,
+    O
 }
