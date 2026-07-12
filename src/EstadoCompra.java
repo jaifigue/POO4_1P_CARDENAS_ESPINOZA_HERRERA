@@ -1,6 +1,5 @@
 package src;
 
-public enum EstadoCompra {
-    REGISTRADA,
-    ANULADA
+public enum EstadoCompra{
+    REGISTRADA, ANULADA
 }
