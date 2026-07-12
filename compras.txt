@@ -1,0 +1,1 @@
+CodigoCompra|Tipo|CodigoReferencia|FechaCompra|Cantidad|ValorPagado|CodigoAficionado
