@@ -1,7 +1,10 @@
 package src;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
 public class Partido {
+    //Atributos Básicos
     private String codigo;
     private String local;
     private String visitante;
@@ -14,7 +17,7 @@ public class Partido {
     private int vip;
     private String fase;
 
-    public Partido(){}
+    //Constructores y métodos básicos
 
     public Partido(String codigo, String local, String visitante, Date fecha, String estadio,
         String ciudad, int capacidad, int general, int preferencial, int vip, String fase
@@ -32,6 +35,23 @@ public class Partido {
         this.fase = fase;
     }
 
+    //Método toString agg a GITHUB
+   @Override
+   public String toString(){
+    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+    String fechaTexto = formato.format(fecha);
+    String zonas = 
+    String.format("- %-13s | Disponibles: %-5d | Precio: $%.2f%n", "GENERAL", general, 45.00) +
+    String.format("- %-13s | Disponibles: %-5d | Precio: $%.2f%n", "PREFERENCIAL", preferencial, 85.00) +
+    String.format("- %-13s | Disponibles: %-5d | Precio: $%.2f%n", "VIP", vip, 150.00);
+
+    return "Código: "+codigo+"\nPartido: "+local+" vs "+visitante
+    +"\nFecha: "+fechaTexto+"\nEstadio: "+estadio+"\nCiudad: "+ciudad+"\nCapacidad: "+capacidad+"\nFase: "+fase+
+    "\nZonas disponibles:\n"+zonas+"\n ------------------------------";
+   }
+
+
+   //Getters y Setters
     public String getCodigo() {
         return codigo;
     }

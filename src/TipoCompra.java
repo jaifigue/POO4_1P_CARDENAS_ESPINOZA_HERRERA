@@ -1,3 +1,5 @@
-public class TipoCompra {
+package src;
 
+public enum TipoCompra{
+    ENTRADA, KIT,
 }
