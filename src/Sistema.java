@@ -5,12 +5,30 @@ import java.util.Scanner;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
+/**
+ * Clase controladora principal del sistema. Coordina la autenticación de
+ * usuarios, la presentación de menús según el rol, las reglas de compra
+ * de entradas y kits, la actualización de disponibilidad y la persistencia
+ * de los datos en archivos de texto.
+ * 
+ * Concentra en memoria las cuatro listas principales del sistema (usuarios,
+ * partidos, kits y compras) y actúa como único punto de coordinación entre
+ * las clases de dominio (Partido, Kit, Compra, Usuario) y la clase de
+ * utilidad ManejoArchivos.
+ *
+ * @author Jair Cárdenas
+ */
 public class Sistema {
     private ArrayList<Usuario> usuarios;
     private ArrayList<Partido> partidos;
     private ArrayList<Kit> kits;
     private ArrayList<Compra> compras;
 
+    /**
+     * Crea una nueva instancia del sistema inicializando en vacío las
+     * cuatro listas que mantendrán los datos en memoria durante la
+     * ejecución del programa.
+     */
     public Sistema(){
         this.usuarios = new ArrayList<>();
         this.partidos = new ArrayList<>();
@@ -18,6 +36,14 @@ public class Sistema {
         this.compras = new ArrayList<>();
     }
 
+    /**
+     * Registra una compra en el sistema: la agrega a la lista en memoria
+     * y escribe la línea correspondiente en compras.txt en modo append,
+     * de modo que memoria y archivo queden siempre sincronizados en un
+     * único punto del código.
+     *
+     * @param c la compra a registrar; si es null, no se realiza ninguna acción
+     */
     public void registrarCompra(Compra c){
         if (c != null){
             compras.add(c);
@@ -29,6 +55,17 @@ public class Sistema {
         }
     }
 
+    /**
+     * Valida las credenciales ingresadas comparándolas contra la lista de
+     * usuarios cargados en memoria. Recorre la lista sin importar si cada
+     * usuario es Aficionado u Organizador, ya que ambos conviven en la
+     * misma lista de tipo Usuario.
+     *
+     * @param usuario nombre de usuario ingresado
+     * @param clave contraseña ingresada
+     * @return el objeto Usuario correspondiente si las credenciales son
+     *         correctas, o null si no hay coincidencia
+     */
     public Usuario validarCredenciales(String usuario, String clave){
         for (Usuario s : usuarios){
             if((s.getUsuario().equals(usuario)) && (s.getContrasena().equals(clave))){
@@ -38,6 +75,13 @@ public class Sistema {
         return null;
     }
 
+    /**
+     * Gestiona el inicio de sesión del usuario: solicita usuario y
+     * contraseña por consola, valida las credenciales y, de ser correctas,
+     * pide una confirmación adicional de identidad (celular para el
+     * aficionado, empresa para el organizador) antes de mostrar el menú
+     * correspondiente a su rol.
+     */
     public void iniciarSesion(){
         Scanner sc = new Scanner(System.in);
         System.out.println("==== INICIO DE SESION ====");
@@ -103,6 +147,16 @@ public class Sistema {
 
     }
 
+    /**
+     * Muestra el menú correspondiente según el tipo real del usuario
+     * autenticado (Aficionado u Organizador) y gestiona el ciclo de
+     * opciones hasta que el usuario decide salir. Para el aficionado
+     * permite consultar partidos, comprar entradas, comprar kits y
+     * consultar sus propias compras; para el organizador permite
+     * consultar todas las compras y generar el reporte de ventas.
+     *
+     * @param usuario el usuario ya autenticado (Aficionado u Organizador)
+     */
     public void mostrarMenu(Usuario usuario){
         Scanner sc = new Scanner(System.in);
         if (usuario instanceof Aficionado){
@@ -296,6 +350,19 @@ public class Sistema {
     }
     //NUEVO ZONA ENTRADA EN EL CONSTRUCTOR
 
+    /**
+     * Ejecuta la compra de una entrada individual para un partido: crea el
+     * objeto Compra, la registra en memoria y archivo, actualiza el stock
+     * de la zona correspondiente directamente sobre el objeto Partido en
+     * memoria, y notifica al aficionado. Asume que la validación de stock
+     * y cantidad ya se realizó previamente en mostrarMenu().
+     *
+     * @param a el aficionado que realiza la compra
+     * @param p el partido para el cual se compra la entrada
+     * @param z la zona de entrada elegida (GENERAL, PREFERENCIAL o VIP)
+     * @param cantidad número de entradas a comprar
+     * @return la compra recién creada y registrada
+     */
     public Compra comprar(Aficionado a, Partido p, ZonaEntrada z, int cantidad){
 
         double precioZona = obtenerPrecioPorZona(z);
@@ -330,6 +397,18 @@ public class Sistema {
         return compraNueva;
     }
 
+    /**
+     * Ejecuta la compra de uno o más kits: crea el objeto Compra, la
+     * registra en memoria y archivo, actualiza la disponibilidad del kit
+     * directamente sobre el objeto Kit en memoria, y notifica al
+     * aficionado. Es la versión sobrecargada de comprar() para kits,
+     * distinta de la que recibe un Partido y una ZonaEntrada.
+     *
+     * @param a el aficionado que realiza la compra
+     * @param k el kit que se está comprando
+     * @param cantidad número de kits a comprar
+     * @return la compra recién creada y registrada
+     */
     public Compra comprar(Aficionado a, Kit k, int cantidad){
     
         double total = k.getPrecio() * cantidad;
@@ -352,6 +431,16 @@ public class Sistema {
         return compraNueva;
     }
 
+    /**
+     * Simula el envío de un correo de confirmación al aficionado tras la
+     * compra de una entrada individual, mostrando por consola los datos
+     * del partido, la zona y el monto pagado. Es una de las tres versiones
+     * sobrecargadas de notificar().
+     *
+     * @param a el aficionado que recibe la notificación
+     * @param c la compra realizada
+     * @param z la zona de entrada comprada
+     */
     public void notificar(Aficionado a, Compra c, ZonaEntrada z){
         System.out.println("==== SIMULACION DE CORREO ELECTRONICO ====");
         System.out.println("De: correoSistema@mundial.com");
@@ -373,6 +462,16 @@ public class Sistema {
         System.out.println("Gracias por adquirir sus entradas para el Mundial. Recuerde conservar el código de compra para futuras consultas.");
     }
 
+    /**
+     * Simula el envío de un correo de confirmación al aficionado tras la
+     * compra de un kit, mostrando por consola los datos del kit y el monto
+     * pagado. Es la versión sobrecargada de notificar() específica para
+     * compras de tipo kit.
+     *
+     * @param a el aficionado que recibe la notificación
+     * @param c la compra realizada
+     * @param k el kit comprado
+     */
     public void notificar(Aficionado a, Compra c, Kit k){
         System.out.println("==== SIMULACION DE CORREO ELECTRONICO ====");
         System.out.println("De: correoSistema@mundial.com");
@@ -390,6 +489,15 @@ public class Sistema {
         System.out.println("Gracias por adquirir sus kit/s para el Mundial. Recuerde conservar el código de compra para futuras consultas.");
     }
 
+    /**
+     * Simula el envío de un correo al organizador con el resumen del
+     * reporte de ventas generado, mostrando por consola las estadísticas
+     * totales del sistema. Es la versión sobrecargada de notificar()
+     * específica para organizadores.
+     *
+     * @param o el organizador que recibe la notificación
+     * @param r el reporte de ventas generado
+     */
     public void notificar(Organizador o, ReporteVentas r){
         System.out.println("==== SIMULACION DE CORREO ELECTRONICO ====");
         System.out.println("De: correoSistema@mundial.com");
@@ -406,6 +514,14 @@ public class Sistema {
         System.out.println("Monto total recaudado: "+r.getMontoTotal());
     }
 
+    /**
+     * Carga todos los datos del sistema desde los archivos de texto,
+     * respetando un orden específico de dependencias: primero los
+     * partidos, porque los kits hacen referencia a partidos por código y
+     * necesitan que ya existan como objetos en memoria para poder
+     * resolverlos; las compras se cargan al final porque hacen referencia
+     * a partidos o kits ya existentes.
+     */
     public void cargarDatos(){
         cargarPartidos();
         cargarUsuarios();
@@ -416,6 +532,13 @@ public class Sistema {
 
     //Métodos auxiliar nuevo que no está en el UML 
 
+    /**
+     * Busca un partido en la lista en memoria a partir de su código.
+     *
+     * @param codigoPartido código del partido a buscar
+     * @return el objeto Partido encontrado, o null si no existe ninguno
+     *         con ese código
+     */
     private Partido buscarPartidoPorCodigo(String codigoPartido){
         for(Partido p : partidos){
             if (codigoPartido.equalsIgnoreCase(p.getCodigo())){
@@ -425,6 +548,14 @@ public class Sistema {
         return null;
     }
 
+    /**
+     * Traduce una zona de entrada a su precio fijo correspondiente,
+     * centralizando la tabla de precios en un único método.
+     *
+     * @param zona la zona de entrada (GENERAL, PREFERENCIAL o VIP)
+     * @return el precio unitario de esa zona; 0.00 si la zona no coincide
+     *         con ninguna de las conocidas
+     */
     private double obtenerPrecioPorZona(ZonaEntrada zona){
         if (zona == ZonaEntrada.GENERAL){
             return 45.00;
@@ -440,6 +571,13 @@ public class Sistema {
         }
     }
 
+    /**
+     * Busca un kit en la lista en memoria a partir de su código.
+     *
+     * @param codigo código del kit a buscar
+     * @return el objeto Kit encontrado, o null si no existe ninguno con
+     *         ese código
+     */
     private Kit buscarKitPorCodigo(String codigo){
         for (Kit k : kits){
             if(k.getCodigo().equalsIgnoreCase(codigo)){
@@ -450,6 +588,12 @@ public class Sistema {
     }
 
 
+    /**
+     * Carga los usuarios del sistema combinando la información general de
+     * usuarios.txt con los datos específicos de aficionados.txt u
+     * organizadores.txt según el rol de cada usuario, construyendo el
+     * objeto Aficionado u Organizador correspondiente.
+     */
     private void cargarUsuarios(){
         ArrayList<String> lineasUsuarios = ManejoArchivos.leerFichero("usuarios.txt");
         ArrayList<String> lineasAficionados = ManejoArchivos.leerFichero("aficionados.txt");
@@ -513,6 +657,12 @@ public class Sistema {
     System.out.println("Usuarios cargados: " + usuarios.size());
 }
 
+    /**
+     * Carga los partidos del sistema desde partidos.txt, convirtiendo cada
+     * línea de texto en un objeto Partido. Se ejecuta primero dentro de
+     * cargarDatos() porque los kits dependen de que los partidos ya
+     * existan en memoria.
+     */
     private void cargarPartidos(){
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         try{
@@ -543,6 +693,12 @@ public class Sistema {
         }
     }
 
+    /**
+     * Carga los kits del sistema desde kits.txt. Cada kit hace referencia
+     * a uno o más partidos por código (separados por coma), los cuales se
+     * traducen a objetos Partido reales mediante buscarPartidoPorCodigo(),
+     * por lo que este método debe ejecutarse después de cargarPartidos().
+     */
     private void cargarKits(){
         ArrayList<String> lineasKits = ManejoArchivos.leerFichero("kits.txt");
         for (int i = 1; i < lineasKits.size() ; i++){
@@ -574,6 +730,15 @@ public class Sistema {
         System.out.println("Kits cargados: "+kits.size());
     }
 
+    /**
+     * Carga las compras previamente registradas desde compras.txt,
+     * reconstruyendo cada objeto Compra con el segundo constructor (el que
+     * recibe un código ya existente), lo cual también actualiza el
+     * contador estático de Compra al valor más alto encontrado, evitando
+     * códigos duplicados en ejecuciones futuras. Se ejecuta al final
+     * dentro de cargarDatos() porque depende de que partidos y kits ya
+     * existan en memoria.
+     */
     private void cargarCompras(){
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -602,34 +767,43 @@ public class Sistema {
             e.printStackTrace();
         }
     }
+
+    /** @return la lista de usuarios cargados en el sistema */
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
 
+    /** @param usuarios nueva lista de usuarios a asignar al sistema */
     public void setUsuarios(ArrayList<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
 
+    /** @return la lista de partidos cargados en el sistema */
     public ArrayList<Partido> getPartidos() {
         return partidos;
     }
 
+    /** @param partidos nueva lista de partidos a asignar al sistema */
     public void setPartidos(ArrayList<Partido> partidos) {
         this.partidos = partidos;
     }
 
+    /** @return la lista de kits cargados en el sistema */
     public ArrayList<Kit> getKits() {
         return kits;
     }
 
+    /** @param kits nueva lista de kits a asignar al sistema */
     public void setKits(ArrayList<Kit> kits) {
         this.kits = kits;
     }
 
+    /** @return la lista de compras registradas en el sistema */
     public ArrayList<Compra> getCompras() {
         return compras;
     }
 
+    /** @param compras nueva lista de compras a asignar al sistema */
     public void setCompras(ArrayList<Compra> compras) {
         this.compras = compras;
     }
