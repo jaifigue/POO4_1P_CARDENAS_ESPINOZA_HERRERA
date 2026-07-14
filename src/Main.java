@@ -1,4 +1,6 @@
 package src;
+import src.modelo.Sistema;
+
 
 /**
  * Punto de entrada del programa. Deliberadamente tiene muy poco código:

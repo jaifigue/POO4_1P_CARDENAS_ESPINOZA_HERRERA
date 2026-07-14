@@ -1,4 +1,4 @@
-package src;
+package src.enums;
 
 /**
  * Representa la zona de ubicación de una entrada dentro de un partido.

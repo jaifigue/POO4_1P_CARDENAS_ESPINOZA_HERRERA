@@ -1,4 +1,5 @@
-package src;
+package src.modelo;
+import src.enums.*;
 
 import java.util.ArrayList;
 

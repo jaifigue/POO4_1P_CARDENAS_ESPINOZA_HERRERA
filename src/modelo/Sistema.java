@@ -1,4 +1,7 @@
-package src;
+package src.modelo;
+import src.util.*;
+import src.enums.*;
+
 
 import java.util.ArrayList;
 import java.util.Scanner;

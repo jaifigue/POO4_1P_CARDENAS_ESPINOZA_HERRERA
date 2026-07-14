@@ -1,4 +1,4 @@
-package src;
+package src.enums;
 
 /**
  * Representa el rol de un usuario dentro del sistema. Se guarda como una
