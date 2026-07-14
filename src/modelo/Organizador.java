@@ -10,9 +10,12 @@ import java.util.ArrayList;
  * atributos propios: empresa y cargo.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public class Organizador extends Usuario{
+    /** Empresa a la que pertenece el organizador, usada como verificación adicional al iniciar sesión. */
     private String empresa;
+    /** Cargo que ocupa el organizador dentro de la empresa. */
     private String cargo;
 
     /**
