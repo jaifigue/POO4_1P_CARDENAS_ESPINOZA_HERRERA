@@ -7,6 +7,7 @@ package src.enums;
  * comparaciones seguras con ==.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public enum TipoCompra{
     /** Compra de una entrada individual para un partido específico. */

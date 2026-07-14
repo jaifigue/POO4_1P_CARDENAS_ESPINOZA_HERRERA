@@ -7,6 +7,7 @@ package src.enums;
  * al cargar los usuarios.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public enum RolUsuario{
     /** Rol de Aficionado. */
