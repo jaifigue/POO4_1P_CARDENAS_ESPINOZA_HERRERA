@@ -468,6 +468,7 @@ public class Sistema {
         System.out.println("Cantidad: "+c.getCantidad());
         System.out.println("Valor pagado: $"+c.getValorPagado());
         System.out.println("Gracias por adquirir sus entradas para el Mundial. Recuerde conservar el código de compra para futuras consultas.");
+        EnviadorCorreo.enviarCorreo(a.getCorreo(), "Compra de entrada realizada","Su compra ha sido registrada con el código " + c.getCodigo() + ". Valor pagado: $" + c.getValorPagado());
     }
 
     /**
@@ -495,6 +496,7 @@ public class Sistema {
         System.out.println("Cantidad: "+c.getCantidad());
         System.out.println("Valor pagado: $"+c.getValorPagado());
         System.out.println("Gracias por adquirir sus kit/s para el Mundial. Recuerde conservar el código de compra para futuras consultas.");
+        EnviadorCorreo.enviarCorreo(a.getCorreo(), "Compra de kit realizada","Su compra del kit " + k.getNombre() + " ha sido registrada con el código " + c.getCodigo() + ".");
     }
 
     /**
@@ -504,7 +506,7 @@ public class Sistema {
      * específica para organizadores.
      *
      * @param o el organizador que recibe la notificación
-     * @param r el reporte de ventas generado
+    //  * @param r el reporte de ventas generado
      */
     public void notificar(Organizador o, ReporteVentas r){
         System.out.println("==== SIMULACION DE CORREO ELECTRONICO ====");
@@ -520,6 +522,7 @@ public class Sistema {
         System.out.println("Total de compras de entradas individuales: "+r.getTotalEntradas());
         System.out.println("Total de compras de kits: "+r.getTotalKits());
         System.out.println("Monto total recaudado: "+r.getMontoTotal());
+        EnviadorCorreo.enviarCorreo(o.getCorreo(), "Reporte de ventas generado","Total de compras: " + r.getTotalCompras() + ". Monto total recaudado: $" + r.getMontoTotal());
     }
 
     /**
