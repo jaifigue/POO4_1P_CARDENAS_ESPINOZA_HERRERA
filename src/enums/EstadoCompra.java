@@ -1,4 +1,4 @@
-package src;
+package src.enums;
 
 /**
  * Representa el estado de una compra dentro del sistema. Se usa un enum

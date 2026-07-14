@@ -1,4 +1,4 @@
-package src;
+package src.enums;
 
 /**
  * Representa el tipo de una compra dentro del sistema: entrada
