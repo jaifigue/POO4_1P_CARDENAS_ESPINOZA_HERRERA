@@ -7,6 +7,7 @@ package src.enums;
  * y hace el código más legible (ej. ZonaEntrada.VIP).
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public enum ZonaEntrada{
     /** Zona general, la de menor precio. */
