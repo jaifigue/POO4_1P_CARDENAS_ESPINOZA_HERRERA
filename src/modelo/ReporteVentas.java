@@ -17,13 +17,19 @@ import java.util.ArrayList;
  * generarlos en otro formato.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public class ReporteVentas {
     //Atributos básicos
+    /** Número total de compras registradas en el sistema. */
     private int totalCompras;
+    /** Número total de entradas individuales vendidas. */
     private int totalEntradas;
+    /** Número total de kits vendidos. */
     private int totalKits;
+    /** Monto total recaudado por todas las compras. */
     private double montoTotal;
+    /** Fecha en la que se generó el reporte. */
     private Date fechaReporte;
 
     //Métodos y constructores
