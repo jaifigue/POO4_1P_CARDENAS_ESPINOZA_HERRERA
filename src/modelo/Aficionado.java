@@ -11,10 +11,13 @@ import java.util.ArrayList;
  * celular y país favorito.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public class Aficionado extends Usuario{
     //Atributos básicos
+    /** Número de celular del aficionado, usado como verificación adicional al iniciar sesión. */
     private String celular;
+    /** País favorito del aficionado. */
     private String paisFavorito;
 
     //Métodos y constructores
