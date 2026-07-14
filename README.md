@@ -8,20 +8,20 @@ Este proyecto implementa un sistema de venta y consulta de entradas para partido
 
 La aplicacion:
 
-- autentica usuarios por rol (aficionado u organizador),
-- permite operaciones distintas segun el tipo de usuario,
-- controla disponibilidad de entradas por zonas y de kits,
-- registra compras en memoria y en archivos de texto,
+- autentica usuarios por rol (aficionado u organizador).
+- permite operaciones distintas segun el tipo de usuario.
+- controla disponibilidad de entradas por zonas y de kits.
+- registra compras en memoria y en archivos de texto.
 - genera un reporte de ventas para organizadores.
 
 ## Problema a resolver
 
 El sistema resuelve la gestion de venta de entradas para un evento deportivo, con las siguientes necesidades:
 
-- manejar distintos roles con permisos diferentes,
-- mantener la disponibilidad actualizada en tiempo real,
-- registrar compras de forma persistente,
-- permitir consultas de compras,
+- manejar distintos roles con permisos diferentes.
+- mantener la disponibilidad actualizada en tiempo real.
+- registrar compras de forma persistente.
+- permitir consultas de compras.
 - consolidar informacion de ventas para toma de decisiones.
 
 ## Estructura de src
@@ -39,8 +39,8 @@ Archivo: `src/Main.java`
 
 Responsabilidad:
 
-- iniciar la aplicacion,
-- cargar los datos,
+- iniciar la aplicacion.
+- cargar los datos.
 - comenzar el flujo de inicio de sesion.
 
 Metodo principal:
