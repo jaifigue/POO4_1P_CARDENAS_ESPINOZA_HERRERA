@@ -10,14 +10,21 @@ import java.util.ArrayList;
  * buscarlos cada vez que se necesita mostrar el kit.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public class Kit {
     //Atributos
+    /** Código único que identifica al kit. */
     private String codigo;
+    /** Nombre comercial del kit. */
     private String nombre;
+    /** Descripción del kit. */
     private String descripcion;
+    /** Lista de partidos incluidos en el kit. */
     private ArrayList<Partido> partidos = new ArrayList<>();
+    /** Precio de venta del kit. */
     private double precio;
+    /** Cantidad de kits disponibles para la venta. */
     private int disponibles;
 
     //Constructores y métodos basicos
