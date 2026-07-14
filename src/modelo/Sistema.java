@@ -20,11 +20,16 @@ import java.text.SimpleDateFormat;
  * utilidad ManejoArchivos.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public class Sistema {
+    /** Lista de todos los usuarios (aficionados y organizadores) registrados en el sistema. */
     private ArrayList<Usuario> usuarios;
+    /** Lista de todos los partidos cargados en el sistema. */
     private ArrayList<Partido> partidos;
+    /** Lista de todos los kits disponibles en el sistema. */
     private ArrayList<Kit> kits;
+    /** Lista de todas las compras registradas en el sistema. */
     private ArrayList<Compra> compras;
 
     /**
