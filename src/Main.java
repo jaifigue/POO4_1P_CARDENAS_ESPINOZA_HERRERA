@@ -11,6 +11,7 @@ import src.modelo.Sistema;
  * probar y reutilizar esa lógica de forma independiente.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public class Main {
     /**
