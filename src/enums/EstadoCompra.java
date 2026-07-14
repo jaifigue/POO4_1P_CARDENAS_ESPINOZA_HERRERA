@@ -7,6 +7,7 @@ package src.enums;
  * usar una bandera booleana ambigua.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public enum EstadoCompra{
     /** La compra fue registrada correctamente y sigue vigente. */
