@@ -13,18 +13,27 @@ import java.util.Date;
  * para cada objeto.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public class Compra {
     //Atributos básicos
     /** Contador compartido entre todas las instancias, usado para generar códigos únicos de compra. */
     private static int contador;
+    /** Código único que identifica a la compra (ej. C001). */
     private String codigo;
+    /** Tipo de compra: ENTRADA o KIT. */
     private TipoCompra tipo;
+    /** Código del partido o del kit al que hace referencia la compra. */
     private String codigoReferencia;
+    /** Fecha en la que se realizó la compra. */
     private Date fechaCompra;
+    /** Cantidad de entradas o kits adquiridos en la compra. */
     private int cantidad;
+    /** Valor total pagado por la compra. */
     private double valorPagado;
+    /** Código único del aficionado que realizó la compra. */
     private String codigoAficionado;
+    /** Estado actual de la compra: REGISTRADA o ANULADA. */
     private EstadoCompra estado;
 
 
