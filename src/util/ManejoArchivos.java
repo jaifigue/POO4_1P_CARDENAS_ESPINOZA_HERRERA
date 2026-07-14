@@ -20,6 +20,7 @@ import java.util.ArrayList;
  * para utilizarla.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public class ManejoArchivos {
 
