@@ -16,16 +16,25 @@ import java.util.ArrayList;
  * rol), evitando así duplicarlos en cada subclase.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public abstract class Usuario {
     //Atributos básicos
+    /** Código único que identifica al usuario en el sistema. */
     protected String codigoUnico;
+    /** Número de cédula del usuario. */
     protected String cedula;
+    /** Nombres del usuario. */
     protected String nombres;
+    /** Apellidos del usuario. */
     protected String apellidos;
+    /** Nombre de usuario utilizado para iniciar sesión. */
     protected String usuario;
+    /** Contraseña utilizada para iniciar sesión. */
     protected String contrasena;
+    /** Correo electrónico del usuario. */
     protected String correo;
+    /** Rol del usuario en el sistema (A para Aficionado, O para Organizador). */
     protected RolUsuario rol;
 
     //Constructores y metodos
