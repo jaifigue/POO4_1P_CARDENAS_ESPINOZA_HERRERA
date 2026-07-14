@@ -1,1 +1,3 @@
 CodigoCompra|Tipo|CodigoReferencia|FechaCompra|Cantidad|ValorPagado|CodigoAficionado
+C001|KIT|K015|2026-07-14|5|2750.0|A008
+C002|KIT|K015|2026-07-14|4|2200.0|A008
