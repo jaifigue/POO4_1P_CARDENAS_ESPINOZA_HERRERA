@@ -12,19 +12,31 @@ import java.util.Date;
  * propia capacidad y su propio remanente, independiente de los demás.
  *
  * @author Jair Cárdenas
+ * @version 1.0
  */
 public class Partido {
     //Atributos Básicos
+    /** Código único que identifica al partido. */
     private String codigo;
+    /** Selección local del partido. */
     private String local;
+    /** Selección visitante del partido. */
     private String visitante;
+    /** Fecha en la que se disputa el partido. */
     private Date fecha;
+    /** Estadio donde se disputa el partido. */
     private String estadio;
+    /** Ciudad donde se ubica el estadio. */
     private String ciudad;
+    /** Capacidad total de espectadores del estadio. */
     private int capacidad;
+    /** Cantidad de entradas disponibles en la zona general. */
     private int general;
+    /** Cantidad de entradas disponibles en la zona preferencial. */
     private int preferencial;
+    /** Cantidad de entradas disponibles en la zona VIP. */
     private int vip;
+    /** Fase del torneo a la que corresponde el partido. */
     private String fase;
 
     //Constructores y métodos básicos
